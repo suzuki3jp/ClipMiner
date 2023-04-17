@@ -3,12 +3,14 @@ import path from 'path';
 
 export class DataManger {
     _paths: {
+        clips: string;
         env: string;
         settings: string;
     };
 
     constructor() {
         this._paths = {
+            clips: path.resolve(__dirname, '../../data/clips.json'),
             env: path.resolve(__dirname, '../../.env'),
             settings: path.resolve(__dirname, '../../data/settings.json'),
         };
@@ -16,6 +18,14 @@ export class DataManger {
 
     setEnv(data: string) {
         this._writeFile(this._paths.env, data);
+    }
+
+    getClips(): ClipsJson {
+        return this._readFile(this._paths.clips);
+    }
+
+    setClips(data: string | ClipsJson) {
+        this._writeFile(this._paths.clips, data);
     }
 
     getSettings(): SettingsJson {
@@ -43,7 +53,7 @@ export class DataManger {
     }
 }
 
-type JsonTypes = SettingsJson;
+type JsonTypes = SettingsJson | ClipsJson;
 
 interface SettingsJson {
     twitch: {
@@ -52,4 +62,14 @@ interface SettingsJson {
          */
         channels: string[];
     };
+}
+
+interface ClipsJson {
+    clips: Clip[];
+}
+
+export interface Clip {
+    id: string;
+    sent_at: string;
+    sent_in: string;
 }
