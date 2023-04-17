@@ -2,9 +2,10 @@ import { Logger } from '@suzuki3jp/logger';
 import { Env } from '@suzuki3jp/utils';
 import { TwitchClient } from '@suzuki3jp/twitch.js';
 import { config } from 'dotenv';
+import dayjs from 'dayjs';
 config();
 
-import { DataManger } from './class/DataManager';
+import { DataManger, Clip } from './class/DataManager';
 
 if (!process.env.TOKEN || !process.env.REFRESHTOKEN || !process.env.CLIENTID || !process.env.CLIENTSECRET) {
     throw new Error('.env contents invalid.');
@@ -47,9 +48,20 @@ if (!process.env.TOKEN || !process.env.REFRESHTOKEN || !process.env.CLIENTID || 
     });
 
     client.on('messageCreate', (message) => {
-        if (message.content === '!ping') {
-            message.reply('pong!');
-        }
+        const clipBaseUrl = 'https://clips.twitch.tv/';
+
+        if (message.content.startsWith(clipBaseUrl)) {
+            const clipId = message.content.slice(clipBaseUrl.length);
+            const { clips } = DM.getClips();
+
+            const newClip: Clip = {
+                id: clipId,
+                sent_in: message.channel.name.slice(1),
+                sent_at: dayjs().toISOString(),
+            };
+            clips.push(newClip);
+            DM.setClips({ clips });
+        } else return;
     });
 
     logger.on('system', (message) => console.log(message));
