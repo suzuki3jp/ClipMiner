@@ -4,7 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npx tsc",
+    "start": "node ./dist/index.js",
+    "dev": "npx ts-node ./src/index.ts",
+    "pm2:start": "pm2 start pm2.config.js",
+    "pm2:stop": "pm2 stop pm2.config.js",
+    "pm2:restart": "pm2 restart pm2.config.js",
+    "pm2:kill": "pm2 delete pm2.config.js"
   },
   "author": "suzuki3jp <suzuki3.info@gmail.com>",
   "license": "MIT",
@@ -16,6 +22,8 @@
   "dependencies": {
     "@suzuki3jp/logger": "^2.0.0",
     "@suzuki3jp/twitch.js": "^1.1.5",
+    "@suzuki3jp/utils": "^3.3.0",
+    "dayjs": "^1.11.7",
     "dotenv": "^16.0.3"
   }
 }
