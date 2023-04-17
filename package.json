@@ -1,0 +1,21 @@
+{
+  "name": "clip-miner",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "suzuki3jp <suzuki3.info@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "prettier": "^2.8.7",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "@suzuki3jp/logger": "^2.0.0",
+    "@suzuki3jp/twitch.js": "^1.1.5",
+    "dotenv": "^16.0.3"
+  }
+}
