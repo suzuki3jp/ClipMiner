@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "npx ts-node ./src/index.ts"
   },
   "author": "suzuki3jp <suzuki3.info@gmail.com>",
   "license": "MIT",
@@ -16,6 +16,7 @@
   "dependencies": {
     "@suzuki3jp/logger": "^2.0.0",
     "@suzuki3jp/twitch.js": "^1.1.5",
+    "@suzuki3jp/utils": "^3.3.0",
     "dotenv": "^16.0.3"
   }
 }
